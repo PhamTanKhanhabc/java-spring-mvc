@@ -1,5 +1,7 @@
 package vn.hoidanit.laptopshop.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +22,9 @@ public class UserController {
     
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.handleHello();
-        model.addAttribute("eric", test);
+        List<User> arrUsers = this.userService.getAllUsersByEmail("1@gmail.com");
+        System.out.println(arrUsers);
+        model.addAttribute("eric", "test");
         model.addAttribute("hoidanit", "from controller with model");
         return "hello"; //View trong MVC
     }
@@ -33,6 +36,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
     public String createUserPage(Model model , @ModelAttribute("newUser") User hoidanit) { //@ModelAttribute("newUser"): lay thuoc tinh, User: kdl, hoidanit: dat ten bien
         System.out.println("Run here" + hoidanit); 
+        this.userService.handleSaveUser(hoidanit);
         return "hello"; //View trong MVC
     }
 }
