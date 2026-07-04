@@ -30,10 +30,14 @@ public class UserController {
     }
     @RequestMapping("/admin/user") //GET
     public String getUserPage(Model model) {
+        return "admin/user/table-user"; //View trong MVC
+    }
+    @RequestMapping("/admin/user/create") //GET
+    public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create"; //View trong MVC
     }
-    @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model , @ModelAttribute("newUser") User hoidanit) { //@ModelAttribute("newUser"): lay thuoc tinh, User: kdl, hoidanit: dat ten bien
         System.out.println("Run here" + hoidanit); 
         this.userService.handleSaveUser(hoidanit);

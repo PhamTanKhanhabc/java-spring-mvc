@@ -30,7 +30,7 @@
                             <!-- mx-auto: margin-left + margin-right auto → căn giữa cột -->
                             <h3>Create a user</h3>
                             <hr />
-                            <form:form method="post" action="/admin/user/create1" modelAttribute="newUser">
+                            <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
                                 <!-- action la dg link url -->
                                 <div class="mb-3"> <!-- mb = margin-bottom -->
                                     <label class="form-label">Email: </label>
