@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,7 +20,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    
+    //GetMapping hiểu là dùng method get luôn
     @RequestMapping("/")
     public String getHomePage(Model model) {
         List<User> arrUsers = this.userService.getAllUsersByEmail("1@gmail.com");
@@ -30,7 +31,15 @@ public class UserController {
     }
     @RequestMapping("/admin/user") //GET
     public String getUserPage(Model model) {
+        List<User> users = this.userService.getAllUser();
+        model.addAttribute("users1", users);
         return "admin/user/table-user"; //View trong MVC
+    }
+    @RequestMapping("/admin/user/{id}") //GET
+    public String getUserDetailPage(Model model, @PathVariable long id) {
+        System.out.println("Check path id=" + id);
+        model.addAttribute("id", id);
+        return "admin/user/show"; //View trong MVC
     }
     @RequestMapping("/admin/user/create") //GET
     public String getCreateUserPage(Model model) {
@@ -41,7 +50,7 @@ public class UserController {
     public String createUserPage(Model model , @ModelAttribute("newUser") User hoidanit) { //@ModelAttribute("newUser"): lay thuoc tinh, User: kdl, hoidanit: dat ten bien
         System.out.println("Run here" + hoidanit); 
         this.userService.handleSaveUser(hoidanit);
-        return "hello"; //View trong MVC
+        return "redirect:/admin/user"; //redirect: yêu cầu trình duyệt truy cập sang URL khác(URL phía trên). //kh co redirect thi chi chuyen view khong chuyen sang url khac
     }
 }
 
