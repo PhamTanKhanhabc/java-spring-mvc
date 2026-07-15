@@ -6,7 +6,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>User Detail {id}</title>
+                <title>Delete Users ${id}</title>
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,27 +23,27 @@
 
                     <div class="row">
                         <!-- row: tạo một hàng ngang trong hệ thống grid Bootstrap -->
+
                         <div class="col-12 mx-auto">
-                            <!-- col-md-6: trên màn hình trung bình trở lên (md ≥ 768px) chiếm 6/12 cột = 50% -->
-                            <!-- col-12: trên màn hình nhỏ (mobile) chiếm 12/12 = full width -->
-                            <!-- mx-auto: margin-left + margin-right auto → căn giữa cột -->
                             <div class="d-flex justify-content-between">
                                 <!-- d-flex: display:flex | justify-content-between: căn hai đầu (space-between) -->
-                                <h3>User Detail with id = ${id}</h3>
+                                <!-- col-12: trên màn hình nhỏ (mobile) chiếm 12/12 = full width -->
+                                <!-- mx-auto: margin-left + margin-right auto → căn giữa cột -->
+                                <h3>Delete the user with id = ${id}</h3>
                             </div>
                             <hr />
-                            <div class="card" style="width: 60%;">
-                                <div class="card-header">
-                                    User information
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${user.id}</li>
-                                    <li class="list-group-item">Email: ${user.email}</li>
-                                    <li class="list-group-item">Full name: ${user.fullName}</li>
-                                    <li class="list-group-item">Address: ${user.address}</li>
-                                </ul>
+                            <div class="alert alert-danger">
+                                Are you sure to delete this user?
                             </div>
-                            <a href="/admin/user" class="btn btn-success mt-3">Back</a> <!-- "mt-3": Margin-top = 1rem -->
+                            <form:form method="post" action="/admin/user/delete" modelAttribute="newUser">
+                                <div class="mb-3" style="display: none;">
+                                    <label class="form-label">Id: </label>
+                                    <form:input value="${id}" type="type" class="form-control" path="id" />
+                                </div>
+                                <button class="btn btn-danger">
+                                    Confirm
+                                </button>
+                            </form:form>
                         </div>
                     </div>
                 </div>
