@@ -1,89 +1,103 @@
-    package vn.hoidanit.laptopshop.domain;
+package vn.hoidanit.laptopshop.domain;
 
-    import jakarta.persistence.Entity;
+import java.util.List;
+
+import org.aspectj.weaver.ast.Or;
+
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-    @Entity
-    public class User {
-        @Id
-        @GeneratedValue(strategy=GenerationType.IDENTITY)
-        private long id;
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-        private String email;
-        private String password;
-        private String fullName;
-        private String address;
-        private String phone;
+    private String email;
+    private String password;
+    private String fullName;
+    private String address;
+    private String phone;
 
-        
-        public long getId() {
-            return id;
-        }
+    private String avatar;
 
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
-
-        public String getEmail() {
-            return email;
-        }
-
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    //role Id
+    //User many -> to one -> role 
+    //[Ctrl + K] + S để lưu 1 lần nhiều file
+    @ManyToOne
+    @JoinColumn(name="role_id") // role_id đặt tên
+    private Role role;
 
 
-        public String getPassword() {
-            return password;
-        }
+    @OneToMany(mappedBy="user")
+    private List<Order> order;
 
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-
-        public String getFullName() {
-            return fullName;
-        }
-
-
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
-        }
-
-
-        public String getAddress() {
-            return address;
-        }
-
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-
-        public String getPhone() {
-            return phone;
-        }
-
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-
-        public String toString(){
-            return "id: " + id + 
-                    "email: " + email +
-                    "password" + password + 
-                    "fullName: " + fullName + 
-                    "address: " + address + 
-                    "phone " + phone;
-        }
+    public long getId() {
+        return id;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
+    }
+}
