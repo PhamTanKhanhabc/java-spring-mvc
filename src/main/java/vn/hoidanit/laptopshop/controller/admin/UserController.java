@@ -14,12 +14,10 @@ import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.ServletContext;
 
 
 
@@ -32,7 +30,7 @@ public class UserController {
 ;
     
 
-    public UserController(UploadService uploadService, UserService userService, ServletContext servletContext, PasswordEncoder passwordEncoder) {
+    public UserController(UploadService uploadService, UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
         this.passwordEncoder = passwordEncoder;
