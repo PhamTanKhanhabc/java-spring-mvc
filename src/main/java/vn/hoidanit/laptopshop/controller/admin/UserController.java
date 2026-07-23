@@ -1,11 +1,9 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,11 +28,14 @@ import jakarta.servlet.ServletContext;
 public class UserController {
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
+;
     
 
-    public UserController(UploadService uploadService, UserService userService, ServletContext servletContext) {
+    public UserController(UploadService uploadService, UserService userService, ServletContext servletContext, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
     //GetMapping hiểu là dùng method get luôn
     @RequestMapping("/")
@@ -66,7 +67,12 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String createUserPage(Model model , @ModelAttribute("newUser") User hoidanit, @RequestParam("hoidanitFile") MultipartFile file) { //@ModelAttribute("newUser"): lay thuoc tinh, User: kdl, hoidanit: dat ten bien
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        // this.userService.handleSaveUser(hoidanit);
+        String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
+        hoidanit.setAvatar(avatar);
+        hoidanit.setPassword(hashPassword);
+        hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
+
+        this.userService.handleSaveUser(hoidanit);
         return "redirect:/admin/user"; //redirect: yêu cầu trình duyệt truy cập sang URL khác(URL phía trên). //kh co redirect thi chi chuyen view khong chuyen sang url khac
     }
     @RequestMapping("/admin/user/update/{id}")
