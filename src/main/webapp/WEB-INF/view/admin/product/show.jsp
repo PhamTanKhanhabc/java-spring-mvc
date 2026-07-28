@@ -38,7 +38,7 @@
                                         <div class="d-flex justify-content-between">
                                             <!-- d-flex: display:flex | justify-content-between: căn hai đầu (space-between) -->
                                             <h3>Table users</h3>
-                                            <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
+                                            <a href="/admin/product/create" class="btn btn-primary">Create a user</a>
                                         </div>
                                         <hr />
                                         <table class="table table-bordered table-hover">
