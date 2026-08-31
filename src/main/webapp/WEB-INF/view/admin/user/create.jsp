@@ -58,11 +58,16 @@
                                                 <!-- action la dg link url -->
                                                 <div class="mb-3 col-12 col-md-6"> <!-- mb = margin-bottom -->
                                                     <label class="form-label">Email: </label>
-                                                    <form:input type="email" class="form-control" path="email" />
+                                                    <form:input type="email" class="form-control is-invalid" path="email" />
+                                                    <form:errors path="email" cssClass="invalid-feedback"/>
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorPassword">
+                                                        <form:errors path="password" cssClass="invalid-feedback"/>
+                                                    </c:set>
                                                     <label class="form-label">Password</label>
-                                                    <form:input type="password" class="form-control" path="password" />
+                                                    <form:input type="password" class="form-control ${not empty errorPassword ? 'is-invalid': ''}" path="password" />
+                                                    ${errorPassword}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone Number</label>
