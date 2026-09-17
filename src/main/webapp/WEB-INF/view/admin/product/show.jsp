@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
         <html lang="en">
@@ -23,56 +23,53 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Manage Products</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="/admin">Dashboard</a>></li>
-                                <li class="breadcrumb-item active">Products</li>
+                                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Product</li>
                             </ol>
                             <div class="mt-5">
-                                <!-- mt-5: margin-top = tạo khoảng cách phía trên (~48px) -->
-
                                 <div class="row">
-                                    <!-- row: tạo một hàng ngang trong hệ thống grid Bootstrap -->
                                     <div class="col-12 mx-auto">
-                                        <!-- col-md-6: trên màn hình trung bình trở lên (md ≥ 768px) chiếm 6/12 cột = 50% -->
-                                        <!-- col-12: trên màn hình nhỏ (mobile) chiếm 12/12 = full width -->
-                                        <!-- mx-auto: margin-left + margin-right auto → căn giữa cột -->
                                         <div class="d-flex justify-content-between">
-                                            <!-- d-flex: display:flex | justify-content-between: căn hai đầu (space-between) -->
-                                            <h3>Table users</h3>
-                                            <a href="/admin/product/create" class="btn btn-primary">Create a user</a>
+                                            <h3>Table products</h3>
+                                            <a href="/admin/product/create" class="btn btn-primary">Create a product</a>
                                         </div>
+
                                         <hr />
-                                        <table class="table table-bordered table-hover">
+                                        <table class=" table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <td>ID</td>
-                                                    <td>Email</td>
-                                                    <td>Full Name</td>
-                                                    <td>Action</td>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                    <th>Factory</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="user" items="${users1}">
-                                                    <!-- users1: truyen qua controller -->
-
+                                                <c:forEach var="product" items="${products}">
                                                     <tr>
-                                                        <th>${user.id}</th>
-                                                        <td>${user.email}</td>
-                                                        <td>${user.fullName}</td>
+                                                        <th>${product.id}</th>
+                                                        <td>${product.name}</td>
+                                                        <td>${product.price}</td>
+                                                        <td>${product.factory}</td>
                                                         <td>
-                                                            <a href="/admin/user/${user.id}"
+                                                            <a href="/admin/product/${product.id}"
                                                                 class="btn btn-success">View</a>
-                                                            <!-- truyen qua controller -->
-                                                            <a href="/admin/user/update/${user.id}"
-                                                                class="btn btn-warning mx-2">Update</a>
-                                                            <a href="/admin/user/delete/${user.id}"
+                                                            <a href="/admin/product/update/${product.id}"
+                                                                class="btn btn-warning  mx-2">Update</a>
+                                                            <a href="/admin/product/delete/${product.id}"
                                                                 class="btn btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
+
                                                 </c:forEach>
+
                                             </tbody>
                                         </table>
                                     </div>
+
                                 </div>
+
                             </div>
                         </div>
                     </main>
@@ -81,7 +78,8 @@
             </div>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                 crossorigin="anonymous"></script>
-            <script src="js/scripts.js"></script>
+            <script src="/js/scripts.js"></script>
+
         </body>
 
         </html>
